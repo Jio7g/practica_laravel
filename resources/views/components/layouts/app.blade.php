@@ -8,6 +8,11 @@
 <body>
 {{--@include('partials.navigation')--}}
 <x-layouts.navigation />
+
+@if(session('status'))   
+        {{ session('status')}}
+@endif
+
 {{ $slot }}
 
 </body>
