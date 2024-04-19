@@ -5,6 +5,8 @@ use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\SavePostRequest;
+
 
 class PostController extends Controller
 {
@@ -12,7 +14,7 @@ class PostController extends Controller
     {
         $posts = Post::get();
 
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index', ['posts' => $posts ]);
     }
 
     public function show(Post $post)
@@ -22,25 +24,15 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', ['post' => new Post]);
     }
 
-    public function store(Request $request)
+    public function store(SavePostRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'min:4'],
-            'body' => ['required']
-        ]);
 
+        Post::create($request->validar());
 
-        $post = new Post();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
-
-        session()->flash('status','Post creado correctamente');
-
-        return to_route('posts.index', $post->id);
+        return to_route('posts.index',)->with('status','Post creado correctamente');
     }
 
     public function edit(Post $post)
@@ -48,19 +40,12 @@ class PostController extends Controller
         return view('posts.edit', ['post' => $post]);
     }
 
-    public function update(Request $request, Post $post)
+    public function update(SavePostRequest $request, Post $post)
     {
-        $request->validate([
-            'title' => ['required', 'min:4'],
-            'body' => ['required']
-        ]);
 
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
+        $post->update($request->validar());
 
-        session()->flash('status','Post actualizado correctamente');
 
-        return to_route('posts.show', $post->id);
+        return to_route('posts.show', $post->id)->with('status','Post actualizado correctamente');;
     }
 }

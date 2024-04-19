@@ -3,25 +3,11 @@
     meta-description="Formulario para crear un nuevo Blo"
 >
 
+    <h1>Crear Nuevo post</h1>
+
     <form action="{{route('posts.store')}}" method="POST">
         @csrf
-        <label>
-            Title   <br>
-                <input type="text" name="title" value="{{ old('title')}}">
-            <br>
-            @error('title')
-                <small style="color: red">{{ $message }}</small>
-            @enderror
-        </label>
-
-        <label><br>
-            Body    <br>
-                <textarea name="body" id="" cols="15" rows="1" value="{{ old('body')}}"></textarea>
-            <br>
-            @error('body')
-                <small style="color: red">{{ $message }}</small>
-            @enderror
-        </label><br>
+        @include('posts.form')
 
         <button type="submit">Enviar</button>
     </form><br>
