@@ -20,7 +20,7 @@ class SavePostRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules()
-    {
+     {
         return [
             'title' => ['required', 'min:4'],
             'body' => ['required']

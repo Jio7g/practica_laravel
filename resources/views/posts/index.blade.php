@@ -13,6 +13,10 @@
             <!--<h3>{{$post->body}}</h3>-->
 
             <a href="{{ route('posts.edit', $post)}}">Editar</a>
+            <form action="{{ route('posts.destroy', $post)}}" method="POST">
+                @csrf @method('DELETE')
+                <button type="submit">Eliminar</button>
+            </form>
         </div>
 
         
