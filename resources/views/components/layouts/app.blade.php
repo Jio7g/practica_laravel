@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>JioDev - @yield('title')</title>
     <meta name="description" content="{{ $metaDescription ?? 'default meta description' }}">
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
 {{--@include('partials.navigation')--}}
