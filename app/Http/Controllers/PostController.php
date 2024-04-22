@@ -29,10 +29,9 @@ class PostController extends Controller
 
     public function store(SavePostRequest $request)
     {
-
-        Post::create($request->validar());
-
-        return to_route('posts.index',)->with('status','Post creado correctamente');
+        Post::create($request->validated());
+    
+        return to_route('posts.index')->with('status', 'Post creado correctamente');
     }
 
     public function edit(Post $post)
@@ -42,11 +41,9 @@ class PostController extends Controller
 
     public function update(SavePostRequest $request, Post $post)
     {
-
-        $post->update($request->validar());
-
-
-        return to_route('posts.show', $post->id)->with('status','Post actualizado correctamente');;
+        $post->update($request->validated());
+    
+        return to_route('posts.show', $post->id)->with('status', 'Post actualizado correctamente');
     }
 
     public function destroy(Post $post)
